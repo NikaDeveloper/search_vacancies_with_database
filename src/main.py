@@ -1,15 +1,15 @@
 from api.hh_api import HHAPI
 from database.db_creator import DBCreator
 from database.db_manager import DBManager
-from utils.config import config
+from utils_local.config import config
 
 
 def main():
-    """ Основная функция программы """
+    """Основная функция программы"""
     print("=== Парсер вакансий с HH.ru ===")
 
     try:
-        test_params = config()
+        _ = config()
         print("✓ Конфигурация БД загружена")
     except Exception as e:
         print(f"✗ Ошибка конфигурации БД: {e}")
@@ -32,10 +32,9 @@ def main():
         "VK",
         "Ozon",
         "Лаборатория Касперского",
-        "1С",
         "Ростелеком",
         "МТС",
-        "Билайн"
+        "Билайн",
     ]
 
     print("\nПолучаем данные о компаниях...")
@@ -66,7 +65,7 @@ def main():
 
 
 def user_interface(db_manager: DBManager) -> None:
-    """ Интерфейс взаимодействия с пользователем """
+    """Интерфейс взаимодействия с пользователем"""
     while True:
         print("\n" + "=" * 50)
         print("МЕНЮ:")

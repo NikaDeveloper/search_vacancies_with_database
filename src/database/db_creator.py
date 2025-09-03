@@ -1,15 +1,17 @@
 import psycopg2
-from utils.config import config
+
+from utils_local.config import config
 
 
 class DBCreator:
-    """ Класс для создания базы данных и таблиц """
+    """Класс для создания базы данных и таблиц"""
+
     def __init__(self, db_name: str = "hh_vacancies"):
         self.db_name = db_name
         self.params = config()
 
     def create_database(self) -> None:
-        """ Создать базу данных """
+        """Создать базу данных"""
         conn = None
         try:
             params = self.params.copy()
@@ -19,7 +21,9 @@ class DBCreator:
             conn.autocommit = True
             cursor = conn.cursor()
 
-            cursor.execute(f"SELECT 1 FROM pg_catalog.pg_database WHERE datname = '{self.db_name}'")
+            cursor.execute(
+                f"SELECT 1 FROM pg_catalog.pg_database WHERE datname = '{self.db_name}'"
+            )
             exists = cursor.fetchone()
             if not exists:
                 cursor.execute(f"CREATE DATABASE {self.db_name}")
@@ -33,7 +37,7 @@ class DBCreator:
                 conn.close()
 
     def create_tables(self) -> None:
-        """ Создать таблицы в базе данных """
+        """Создать таблицы в базе данных"""
         commands = (
             """
                         CREATE TABLE IF NOT EXISTS employers (
@@ -61,7 +65,7 @@ class DBCreator:
                 experience VARCHAR(100),
                 employment_type VARCHAR(100)
             )
-            """
+            """,
         )
 
         conn = None
@@ -84,4 +88,3 @@ class DBCreator:
         finally:
             if conn:
                 conn.close()
-

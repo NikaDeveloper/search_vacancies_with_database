@@ -1,12 +1,16 @@
 import os
 from configparser import ConfigParser
-from typing import Dict, Any
+from typing import Any, Dict
 
 
-def config(filename: str = "config/database.ini", section: str = "postgresql") -> Dict[str, Any]:
-    """ Чтение конфигурации базы данных из файла """
+def config(
+    filename: str = "config/database.ini", section: str = "postgresql"
+) -> Dict[str, Any]:
+    """Чтение конфигурации базы данных из файла"""
     # Получаем абсолютный путь к файлу конфигурации
-    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    base_dir = os.path.dirname(
+        os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    )
     config_path = os.path.join(base_dir, filename)
 
     parser = ConfigParser()

@@ -21,6 +21,13 @@ isort = "^6.0.1"
 mypy = "^1.16.1"
 pytest = "^8.4.1"
 pytest-cov = "^6.2.1"
+types-requests = "^2.32.4.20250809"
+types-psycopg2 = "^2.9.21.20250809"
+
+[tool.mypy]
+mypy_path = "src"
+namespace_packages = true
+explicit_package_bases = true
 
 [build-system]
 requires = ["poetry-core"]
