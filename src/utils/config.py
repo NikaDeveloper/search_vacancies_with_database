@@ -4,9 +4,7 @@ from typing import Dict, Any
 
 
 def config(filename: str = "config/database.ini", section: str = "postgresql") -> Dict[str, Any]:
-    """
-    Чтение конфигурации базы данных из файла.
-    """
+    """ Чтение конфигурации базы данных из файла """
     # Получаем абсолютный путь к файлу конфигурации
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     config_path = os.path.join(base_dir, filename)

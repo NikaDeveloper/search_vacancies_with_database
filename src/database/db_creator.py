@@ -6,7 +6,7 @@ class DBCreator:
     """ Класс для создания базы данных и таблиц """
     def __init__(self, db_name: str = "hh_vacancies"):
         self.db_name = db_name
-        self.params = config
+        self.params = config()
 
     def create_database(self) -> None:
         """ Создать базу данных """
@@ -66,8 +66,9 @@ class DBCreator:
 
         conn = None
         try:
-            params = self.params.copy
+            params = self.params.copy()
             params["database"] = self.db_name
+
             conn = psycopg2.connect(**params)
             cursor = conn.cursor()
 
@@ -76,8 +77,10 @@ class DBCreator:
 
             conn.commit()
             print("Таблицы созданы успешно")
+
         except (Exception, psycopg2.DatabaseError) as error:
             print(f"Ошибка при создании таблиц: {error}")
+            raise
         finally:
             if conn:
                 conn.close()

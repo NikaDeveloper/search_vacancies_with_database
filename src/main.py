@@ -1,11 +1,19 @@
 from api.hh_api import HHAPI
 from database.db_creator import DBCreator
 from database.db_manager import DBManager
+from utils.config import config
 
 
 def main():
-    """Основная функция программы."""
+    """ Основная функция программы """
     print("=== Парсер вакансий с HH.ru ===")
+
+    try:
+        test_params = config()
+        print("✓ Конфигурация БД загружена")
+    except Exception as e:
+        print(f"✗ Ошибка конфигурации БД: {e}")
+        return
 
     # Создаем базу данных и таблицы
     db_creator = DBCreator()
@@ -58,7 +66,7 @@ def main():
 
 
 def user_interface(db_manager: DBManager) -> None:
-    """Интерфейс взаимодействия с пользователем."""
+    """ Интерфейс взаимодействия с пользователем """
     while True:
         print("\n" + "=" * 50)
         print("МЕНЮ:")
